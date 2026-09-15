@@ -3,14 +3,14 @@ CFLAGS = -I./include
 
 TARGET = app
 
-SRCS = $(wildcard src/*.c)
-OBJS = $(patsubst src/%.c, build/%.o, $(SRCS))
+SRCS = src/ex_time.c
+OBJS = build/ex_time.o 
 
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
 	@mkdir -p build
-	$(CC) -o $(TARGET) $(OBJS) 
+	$(CC) -o $(TARGET) $(OBJS)
 
 build/%.o: src/%.c
 	@mkdir -p build
