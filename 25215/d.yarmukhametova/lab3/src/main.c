@@ -2,6 +2,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <errno.h>
 
 void print_uid() {
     printf("real uid: %d\n", getuid());
@@ -11,16 +12,15 @@ void print_uid() {
 int main() {
     printf("before changing uids\n");
     print_uid();
-    
-    int errno;
 
     FILE *file;
     file = fopen("file", "r");
 
     if (file == NULL) {
         perror("error when opening a file");
+    } else {
+        fclose(file); 
     }
-    fclose(file);
 
     int flag = setuid(getuid());
     if (flag == -1) {
@@ -35,8 +35,10 @@ int main() {
 
     if (file == NULL) {
         perror("error when opening a file");
+    } else {
+        fclose(file); 
     }
-    fclose(file);       
+          
 
     return 0;
 }
